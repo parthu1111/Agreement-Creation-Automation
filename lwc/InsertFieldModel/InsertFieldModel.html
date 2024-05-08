@@ -1,0 +1,43 @@
+<template>
+    <lightning-modal-header class="customLabel" label="Select Field"></lightning-modal-header>
+    <lightning-modal-body> 
+        <div class="box">
+            <template for:each={fieldMap} for:item="boxData" for:index="sequence">
+                <!-- <div key={boxData.id} class="eachBox"> -->
+                <template if:true={boxData.lookupBox}>
+                    <div key={boxData.id} class="eachBox">
+                        <ul if:false={boxData.loading} >
+                            <template for:each={boxData.values} for:item="data">
+                                <li data-id={boxData.id} data-api={data.API} data-label={data.label}
+                                    data-type={data.type} data-lookupobj={data.lookupobj} data-picklistval={data.picklistValues}
+                                    data-isformulafield={data.isFormulaField} key={data.API}
+                                    class={data.selectedSyle} onclick={fieldClickHandler}> 
+                                    <lightning-icon class={data.btnStyle} icon-name={data.iconName} alternative-text="Event" title="Event" size="xx-small"></lightning-icon>
+                                     {data.label}</li>
+                            </template>
+                        </ul>
+                        <lightning-spinner if:true={boxData.loading} variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+                    </div>
+                </template>
+                <template if:false={boxData.lookupBox}>
+                    <div key={boxData.id} class="eachBox lastEachBox">
+                        <div class="childLastBox">
+                            <span>Field : </span>
+                            <strong>{result.selectedField}</strong><br/>
+                            <span>Object : </span>
+                            <strong>{result.selectedObject}</strong>
+                            <div class="inserDiv">
+                                <button class="insertBtn" onclick={insertFieldHandler}>Insert</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </template>
+                <!-- </div> -->
+            </template>
+        </div>    
+    </lightning-modal-body>
+    <!-- <lightning-modal-footer>
+        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer> -->
+</template>

@@ -1,0 +1,72 @@
+
+.visiblityTitle{
+    color:red;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+.visiblityTitle_li{
+    color:rgb(252, 81, 81);
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-align: center;
+    /* list-style-type: disc; */
+}
+.actionButton{
+    margin: 0 2px;
+}
+.dataTable{
+    max-height: 200px;
+}
+.footer{
+    color: #00396B;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+}
+.header{
+    color: #00396B;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+.recordLink{
+    color: #00396B;
+}
+.NewButton{
+    margin: 2px;
+}
+button.mybtn{
+    background-color: #00396B;
+    color: white;
+}
+button.mybtn:hover{
+    background-color: white;
+    color:#00396B;
+    border: 1px solid #00396B;
+}
+.spinner{
+    position: relative;
+    height: 10rem;
+    background-color: #a7c6f4;
+}
+.table{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow: scroll;
+}
+.error_box{
+    border: 1px solid rgb(248, 60, 60);
+    border-radius: 15px;
+    padding: 1% 4%;
+    background-color: rgb(255, 158, 158);
+}
+.error_box p{
+    font-size: 0.9rem;
+    line-height: 0.5rem;
+    color: red;
+    font-weight: 700;
+}
+.slds-truncate{
+    text-align: center !important;
+}

@@ -1,0 +1,37 @@
+.isExcludedCheckbox{
+    margin-top: 2rem;
+}
+.error_box{
+    border: 1px solid rgb(248, 60, 60);
+    border-radius: 15px;
+    padding: 2% 4%;
+    background-color: rgb(255, 158, 158);
+}
+.error_box p{
+    font-size: 0.8rem;
+    /* line-height: 0.5rem; */
+    color: red;
+}
+.customLabel{
+    color: #00396B !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+}
+button.mybtn{
+    background-color: #00396B;
+    color: white;
+}
+button.mybtn:hover{
+    background-color: white;
+    color:#00396B;
+    border: 1px solid #00396B;
+}
+/* .inputStyle{
+    font-size: 16px;
+} */
+
+.spinner{
+    position: relative;
+    height: 10rem;
+    background-color: #a7c6f4;
+}

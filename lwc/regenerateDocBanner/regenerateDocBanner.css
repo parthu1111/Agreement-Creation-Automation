@@ -1,0 +1,14 @@
+.banner{
+    padding: 1rem 2rem;
+}
+.banner_content{
+    background: rgb(255, 154, 65);
+    padding: 1rem;
+    border: 3px solid rgb(255 119 0);
+    border-radius: 12px;
+}
+.banner p{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}

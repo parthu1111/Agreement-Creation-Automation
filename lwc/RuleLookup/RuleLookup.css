@@ -1,0 +1,36 @@
+.NoDisplayDelete{
+    visibility: hidden;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #00396B;;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.slds-card__header{ 
+    padding-left: 2% !important;
+    /* margin-top: -1%; */
+}
+.table_col1{
+    width:60% ;
+}
+
+
+.customHeading{
+    color: #00396B;
+    font-size: large;
+    font-weight: bold;
+}
+th{
+    background-color: #00396B !important;
+    color: white !important;
+}
+.text_center{
+    text-align: center;
+}
+.slds-listbox__item{
+    text-align: left;
+}

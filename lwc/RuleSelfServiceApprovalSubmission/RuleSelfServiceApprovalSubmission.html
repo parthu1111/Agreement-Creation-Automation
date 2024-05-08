@@ -1,0 +1,29 @@
+<template>
+    <lightning-modal-header class="customLabel" label={label}></lightning-modal-header>
+    <lightning-modal-body class="pageBody">
+        <template if:true={error}>
+            <div class="error_box">
+                <p>{error}</p>
+            </div>
+        </template>
+        <template if:false={loadingComponant} for:each={records} for:item="item">
+            <div key={item.Id} class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_4-of-12">
+                    <p>{item.Name}</p>
+                </div>
+                <div class="slds-col slds-size_8-of-12">
+                    <lightning-textarea variant="label-hidden" value={item.comment} data-index={item.index} name={item._rule_Name__c} placeholder="Comment..." onchange={handleTextArea}></lightning-textarea>
+                </div>
+            </div>
+        </template>
+        <template  if:true={loadingComponant}>
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+            </div>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <button class="mybtn slds-button slds-button_brand">Cancel</button>
+        <button class="mybtn slds-button slds-button_brand" onclick={bulkApprovalSubmit}>Submit</button>
+    </lightning-modal-footer>
+</template>

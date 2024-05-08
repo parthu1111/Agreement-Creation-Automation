@@ -1,0 +1,57 @@
+<template>
+    <!-- <lightning-workspace-api aura:id="workspaceAPI"></lightning-workspace-api> -->
+    <template if:false={isCancelFlow}>
+        <template if:true={isToolVisible}>
+            <template if:false={loadingComponant}>
+                <lightning-card icon-name="standard:knowledge">
+                    <template if:true={error}>
+                        <div class="error_box">
+                            <p>{error}</p>
+                        </div>
+                    </template>
+                    <h1 slot="title" class="header">Agreement Self Service rules({numberOfRecord})</h1>
+                    <button class="mybtn slds-button slds-button_brand"  onclick={addruleHandler}
+                        slot="actions">New</button>
+                    <button class="mybtn slds-button slds-button_brand"  slot="actions"
+                        onclick={submitForApproval}>Submit For Approval</button>
+    
+    
+                    <div class="table slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <div class="dataTable">
+                                <!-- <lightning-datatable key-field="Id" data={agreementCluaseSelfServiceRecords}
+                                    columns={columns} onrowaction={handleRowAction}>
+                                </lightning-datatable> -->
+                                <c-custom-table-for-rule-self-service key-field="Id" data={agreementCluaseSelfServiceRecords} hide-checkbox-column 
+                                columns={columns} onrowaction={handleRowAction} onviewrecord={handleViewRecord} onhandlecheckboxevent={handlecheckboxevent}>
+                                </c-custom-table-for-rule-self-service>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div slot="footer">
+                        <span onclick={redirectToRelatedList} class="footer">View All</span>
+                    </div> -->
+                </lightning-card>
+            </template>
+            <template  if:true={loadingComponant}>
+                <div class="spinner">
+                    <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+                </div>
+            </template>
+        </template>
+        <template if:false={isToolVisible}>
+            <p class="visiblityTitle">{ToolVisibilityMessage}</p>
+            <!-- <ul>
+                <li class="visiblityTitle_li">{ToolVisibilityError}</li>
+            </ul> -->
+        </template>
+    </template>
+
+    <template if:true={isCancelFlow}> 
+        <lightning-flow
+            flow-api-name="Flow_to_Cancel_rule"
+            flow-input-variables={flowInputVariables}
+            onstatuschange={handleFlowStatusChange}>
+    </lightning-flow>
+    </template>
+</template>

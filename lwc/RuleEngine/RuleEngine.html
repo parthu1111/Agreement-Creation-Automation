@@ -1,0 +1,338 @@
+<template>
+
+    <!-- <lightning-card> -->
+
+    <template if:false={loadingComponant}>
+        <article class="slds-card">
+            <template if:true={isThereAnyError}>
+                <div class="slds-grid slds-grid_align-center error_box">
+                    <div class="slds-col slds-size_10-of-12 slds-box inner_error_box ">
+                        <ol class="slds-list_ordered">
+                            <template for:each={errors} for:index="index" for:item="error">
+                                <li key={error.index} class="errorText">
+                                    {error}
+                                </li>
+                            </template>
+                        </ol>
+                        <!-- <template for:each={errors} for:index="index" for:item="error">
+                            <div key={error.index} class="slds-grid">
+                                <div class="slds-col">
+                                    <p class="errorText">{error}</p>
+                                </div>
+                            </div>
+                        </template> -->
+                    </div>
+                </div>
+            </template>
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span class="customHeading">Rule Detail</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <hr />
+            <template if:true={ruleDetail}>
+                <div class="slds-card__body card__body_inner">
+                    <div class="slds-grid detail_row slds-gutters">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_3-of-12">
+                                    <span>Rule Name : </span>
+                                </div>
+                                <div class="slds-col slds-size_9-of-12">
+                                    <lightning-input type="text" class="ruleName validation" variant="label-hidden"
+                                        name="RuleName" value={ruleDetail.ruleName} onchange={changeRuleName}
+                                        required></lightning-input>
+                                    <span class="Rule Name Error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid detail_row slds-gutters">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_3-of-12">
+                                    <span>Rule Type : </span>
+                                </div>
+                                <div class="slds-col slds-size_9-of-12">
+                                    <lightning-combobox class="ruletype" name="RuleType" value={ruleDetail.ruleType}
+                                        placeholder="Rule Type" options={ruleTypes} variant="label-hidden"
+                                        onchange={changeRuleType}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid detail_row slds-gutters">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_3-of-12">
+                                    <span>Sequence : </span>
+                                </div>
+                                <div class="slds-col slds-size_9-of-12">
+                                    <lightning-input type="number" class="validation" variant="label-hidden"
+                                        name="ruleSequence" value={ruleDetail.ruleSequence}
+                                        onchange={changeRuleSequence} required></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid detail_row slds-gutters">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_3-of-12">
+                                    <span>is Active : </span>
+                                </div>
+                                <div class="slds-col slds-size_9-of-12">
+                                    <lightning-input name="isactive" type="checkbox" checked={ruleDetail.isActive}
+                                        onchange={changeActiveCheckbox}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <br />
+        </article>
+        <!-- </lightning-card> -->
+        <br />
+
+        <!-- <lightning-card> -->
+        <article class="slds-card">
+            <!-- <lightning-button label="Add Row" slot="actions" icon-name="utility:add"
+            onclick={addCondition}></lightning-button> -->
+            <!-- <template for:each={conditionList} for:item="condition">
+            <p key={number}>Name</p>
+            </template> -->
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span class="customHeading">Condition Selection</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <hr />
+            <div class="slds-m-around_medium">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                    aria-labelledby="element-with-table-label other-element-with-table-label">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="Sequence_col text_center" scope="col">
+                                <div class="slds-truncate" title="Sequence">Sequence</div>
+                            </th>
+                            <th class="button_col text_center" scope="col">
+                                <div class="slds-truncate" title=""></div>
+                            </th>
+                            <th class="text_center" scope="col">
+                                <div class="slds-truncate" title="Business Object">Business Object</div>
+                            </th>
+                            <th class="text_center" scope="col">
+                                <div class="slds-truncate" title="Fields">Fields</div>
+                            </th>
+                            <th class="text_center" scope="col">
+                                <div class="slds-truncate" title="Operator">Operator</div>
+                            </th>
+                            <th class="value_col text_center" scope="col">
+                                <div class="slds-truncate" title="Value">Value</div>
+                            </th>
+                            <th class="text_center" scope="col">
+                                <div class="slds-truncate" title="action">Action</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={conditionList} for:index="index" for:item="condition">
+                            <tr class="inputRows" key={condition.id}>
+                                <td class="" data-label="Sequence" scope="row">
+                                    <span>{condition.index}</span>
+                                </td>
+                                <td class="" data-label="insert field" scope="row">
+                                    <button data-id={condition.id} data-index={condition.index}
+                                        class="selectBtn slds-button slds-button_neutral"
+                                        onclick={insertFieldHanlder}>Select Field</button>
+                                </td>
+                                <td class="" data-label="Business Object">
+                                    <!-- <lightning-combobox data-id={condition.id} name="Business Object" class="validation combobox"
+                                        value={condition.setObject} placeholder="select object" variant="label-hidden"
+                                        options={listOfObjects} required onchange={changeBusinessObject}>
+                                    </lightning-combobox> -->
+                                    <!-- <lightning-button data-id={condition.id} data-index={condition.index} label="Select Field" variant="border-filled" onclick={insertFieldHanlder}></lightning-button> -->
+                                    <lightning-input type="text" class="validation" variant="label-hidden"
+                                        name="buisnessObject" value={condition.setObject} disabled></lightning-input>
+                                </td>
+                                <td class="" data-label="Fields">
+                                    <!-- <lightning-combobox data-id={condition.id} name="Fields" value={condition.setField}
+                                        placeholder="select field" options={condition.listOfFields} class="validation combobox"
+                                        spinner-active={condition.lodingFields} onchange={changeField}
+                                        variant="label-hidden" required>
+                                    </lightning-combobox> -->
+                                    <lightning-input type="text" class="validation" variant="label-hidden"
+                                        value={condition.setField} disabled></lightning-input>
+                                </td>
+                                <td class="" data-label="Operator">
+                                    <lightning-combobox data-id={condition.id} name="Oprators"
+                                        value={condition.setOprator} placeholder="Select Operator"
+                                        class="validation combobox" options={listOfOperators} onchange={changeOperator}
+                                        disabled={condition.lodingFields} variant="label-hidden" required>
+                                    </lightning-combobox>
+                                </td>
+                                <td class="" data-label="Value">
+                                    <!-- <lightning-input type="text" data-id={condition.id} class="fields validation"
+                                        variant="label-hidden" label="Value" name="Value" value={condition.setValue}
+                                        onchange={changeValue} disabled={condition.lodingFields} required></lightning-input> -->
+                                    <template if:true={condition.setField}>
+                                        <!-- <template if:true={condition.inputAutoPopulateFeature}>
+                                            <template lwc:if={condition.ismultipicklist}>
+                                                <lightning-dual-listbox name="languages" data-id={condition.id} variant="label-hidden"
+                                                    label="Select Languages"
+                                                    source-label="Available"
+                                                    selected-label="Selected"
+                                                    options={condition.picklistoption}
+                                                    disable-reordering
+                                                    onchange={changeValue}></lightning-dual-listbox>
+                                            </template>
+                                            <template lwc:else>
+                                                <div if:true={condition.recordEditFormLoading} class="recordEditFormLoader">
+                                                    <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+                                                </div>
+                                                <lightning-record-edit-form object-api-name={condition.fieldOfObject} data-id={condition.id} layout-type="Full" onload={recordEditFormDataLoad}>
+                                                    <lightning-messages></lightning-messages>
+                                                    <lightning-input-field field-name={condition.fieldWithOutRel}
+                                                        data-id={condition.id} class="fields clshelptexthide" variant="label-hidden"
+                                                        name="Value" value={condition.setValue} onchange={changeValue}>
+                                                    </lightning-input-field>
+                                                </lightning-record-edit-form>
+                                            </template>
+                                        
+                                        </template>
+                                        <template if:false={condition.inputAutoPopulateFeature}>
+                                            <lightning-input type="text" data-id={condition.id}
+                                                class="fields validation" variant="label-hidden" label="Value"
+                                                name="Value" value={condition.setValue} onchange={changeValue}
+                                                disabled={condition.lodingFields}></lightning-input>
+                                        </template> -->
+                                        <template lwc:if={condition.ismultipicklist}>
+                                            <lightning-dual-listbox name="languages" data-id={condition.id}
+                                                variant="label-hidden" label="Select Languages" source-label="Available"
+                                                selected-label="Selected" options={condition.picklistoption}
+                                                disable-reordering value={condition.setValue} onchange={changeValue}
+                                                class="fields clshelptexthide"></lightning-dual-listbox>
+                                        </template>
+                                        <template lwc:elseif={condition.isPicklist}>
+                                            <lightning-combobox data-id={condition.id} name="picklist"
+                                                value={condition.setValue} placeholder="Select Value"
+                                                options={condition.picklistoption} onchange={changeValue}
+                                                variant="label-hidden"></lightning-combobox>
+                                        </template>
+                                        <template lwc:elseif={condition.inputAutoPopulateFeature}>
+                                            <div if:true={condition.recordEditFormLoading} class="recordEditFormLoader">
+                                                <lightning-spinner alternative-text="Loading" size="small"
+                                                    variant="brand"></lightning-spinner>
+                                            </div>
+                                            <lightning-record-edit-form object-api-name={condition.fieldOfObject}
+                                                data-id={condition.id} layout-type="Full"
+                                                onload={recordEditFormDataLoad}>
+                                                <lightning-messages></lightning-messages>
+                                                <lightning-input-field field-name={condition.fieldWithOutRel}
+                                                    data-id={condition.id} class="fields clshelptexthide"
+                                                    variant="label-hidden" name="Value" value={condition.setValue}
+                                                    onchange={changeValue}>
+                                                </lightning-input-field>
+                                            </lightning-record-edit-form>
+                                        </template>
+                                        <template lwc:else>
+                                            <lightning-input type="text" data-id={condition.id}
+                                                class="fields validation" variant="label-hidden" label="Value"
+                                                name="Value" value={condition.setValue} onchange={changeValue}
+                                                disabled={condition.lodingFields}></lightning-input>
+                                        </template>
+
+
+                                    </template>
+                                    <template if:false={condition.setField}>
+                                        <lightning-input type="text" variant="label-hidden"
+                                            disabled="true"></lightning-input>
+                                    </template>
+                                </td>
+
+                                <td class="" data-label="action">
+                                    <lightning-button-icon icon-name="utility:add" data-index={condition.index}
+                                        onclick={addConditionByIndex} alternative-text="add"
+                                        class="slds-m-left_xx-small addRule actionButton"
+                                        title="add"></lightning-button-icon>
+                                    <lightning-button-icon icon-name="action:delete" data-id={condition.id}
+                                        alternative-text="Delete" title="Delete" onclick={deleteCondition}
+                                        class={condition.visibilityDeleteButton}></lightning-button-icon>
+                                    <!-- <button class="add_btn slds-button slds-button_icon slds-button_icon-border-filled" data-index={condition.index} onclick={addConditionByIndex} >
+                                            <lightning-icon class="add_icon" icon-name="utility:add"
+                                                      alternative-text="close"
+                                                      size="x-small" ></lightning-icon>
+                                           </button>
+                                       <button class="delete_btn slds-button slds-button_icon slds-button_icon-border-filled" data-id={condition.id} onclick={deleteCondition} >
+                                            <lightning-icon class="delete_icon" icon-name="utility:delete"
+                                                      alternative-text="close"
+                                                      size="x-small" ></lightning-icon>
+                                           </button> -->
+
+                                </td>
+                            </tr>
+
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="filterBox">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_5-of-12">
+                        <!-- <p><lightning-formatted-url onclick={filterConditionHandler}
+                                label="Advanced Filter Condition"></lightning-formatted-url> </p> -->
+                        <a class="Filter_Text"><span onclick={filterConditionHandler}>Advanced Filter
+                                Condition</span></a>
+                        <template if:true={ruleDetail.isFilterUsed}>
+                            <lightning-input type="text" class="fields validation" variant="label-hidden"
+                                label="filterCondition" name="filterCondition" value={ruleDetail.filterConditionQuery}
+                                onchange={changeFilterCondition} required></lightning-input>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!-- </lightning-card> -->
+        </article>
+        <br />
+        <template if:false={disableruleSelection}>
+            <c-rule-lookup class="childComponant" parentrecordid={recordId}
+                onlogerror={logErrorByChild}></c-rule-lookup>
+        </template>
+        <div slot="footer" class="footer">
+            <button class="mybtn slds-button slds-button_brand" onclick={closeAction}
+                disabled={loadingComponant}>Cancel</button> &nbsp;
+            <template if:false={recordId}>
+                <button class="mybtn slds-button slds-button_brand" onclick={createOrupdateRule}
+                    disabled={loadingComponant}>Create</button>
+            </template>
+            <template if:true={recordId}>
+                <button class="mybtn slds-button slds-button_brand" onclick={createOrupdateRule}
+                    disabled={loadingComponant}>Update</button>
+            </template>
+            <!-- <lightning-spinner  alternative-text="Loading" size="medium"></lightning-spinner> -->
+        </div>
+    </template>
+    <template if:true={loadingComponant}>
+        <div class="spinner">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+
+    </template>
+
+    <!-- <lightning-record-edit-form object-api-name="Apttus__APTS_Agreement__c">
+        <lightning-messages></lightning-messages>
+        <lightning-input-field field-name="Product_Specific_rules__c"> </lightning-input-field>
+    </lightning-record-edit-form> -->
+</template>

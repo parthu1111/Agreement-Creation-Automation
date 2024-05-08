@@ -1,0 +1,29 @@
+.banner{
+    border: green solid 1px;
+    padding: 2px 3px;
+}
+.container {
+    background-color: #009600;
+    padding: 1%;
+}
+.label{
+    display: flex;
+    align-items: center;
+}
+.icon{
+    --slds-c-icon-color-foreground-default: white;
+    margin-right: 1%;
+}
+.label strong{
+    font-size: 14px;
+    color: white;
+}
+.container_err{
+    background-color: #9f2020;
+    padding: 1%;
+}
+.container_warning{
+    background-color: #d99330;
+    padding: 1%;
+}
+

@@ -1,0 +1,192 @@
+/* .slds-page-header{
+    background-color: cadetblue !important;
+    display: none;
+}
+.header{
+    display: none !important;
+}
+.title[app_flexipage-header_header]{
+    color: white !important;
+} */
+
+/* .page{
+    
+} */
+.slds-card__header{ 
+    padding-left: 2% !important;
+    /* margin-top: -1%; */
+}
+.slds-card__body{
+    padding-left: 2%;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #00396B;;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* .disableruleSelection{
+    display: none;
+} */
+ /* lightning-combobox{
+    margin-top: -20px !important;
+}  */
+.detail_row{
+    margin: 0.6% 0%;
+}
+
+.addRule{
+    margin-right: 5%;
+}
+.disableDelete{
+    visibility: hidden;
+}
+.filterBox{
+    margin-left: 2%;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+}
+
+/* .spinner{
+    height: 100%;
+    width: 100%;
+} */
+.customHeading{
+    color: #00396B;
+    font-size: large;
+    font-weight: bold;
+}
+/* .actionButton{
+   
+    --sds-c-button-color-background:#00396B;
+    --slds-c-button-text-color:white !important;
+
+    --sds-c-button-color-background: black;
+    --sds-c-button-text-color: red;
+    --slds-c-button-text-destructive-color-background: black;
+    --slds-c-button-line-height: red;
+    --slds-c-button-brand-color-background: red;
+    --slds-c-button-brand-text-color: red;
+    --sds-c-icon-color-background: red;
+    --sds-c-icon-color-foreground: orange;
+} */
+
+.inner_error_box{
+    border: 2px solid red;
+    height: 4rem;
+    overflow: scroll;
+    overflow-x: clip;
+    word-wrap: break-word;
+    background-color: #ffcdcd;
+    width: 95%;
+}
+.errorText{
+    word-break: break-all;
+    color: red;
+    padding: 0.2% 0%;
+    font-weight: bold;
+}
+.error_box{
+    margin: 1.5% 0%;
+}
+
+/* .actionButton{
+    --slds-c-button-color-background: #00397B;
+    --slds-c-button-color-background-hover: #c3daf5;
+    color: #FFF;
+} */
+
+th{
+    background-color: #00396B !important;
+    color: white !important;
+}
+/* .slds-input:focus, .slds-input:active {
+    border-color: #00396B !important;
+    box-shadow: none !important;
+} */
+.Sequence_col{
+    width: 5rem !important;
+}
+.button_col{
+    width: 8rem !important;
+}
+.filterBox{
+    margin-bottom: 1rem;
+}
+.spinner{
+    position: relative;
+    height: 80vh;
+    background-color: #a7c6f4;
+}
+td{
+    vertical-align: baseline !important;
+}
+.value_col{
+    min-width: 12rem;
+}
+button.mybtn{
+    background-color: #00396B;
+    color: white;
+    font-size: 0.9rem;
+}
+button.mybtn:hover{
+    background-color: white;
+    color:#00396B;
+    border: 1px solid #00396B;
+}
+
+lightning-helptext{
+    display: none !important;
+}
+.slds-form-element__icon{
+    display: none !important;
+}
+.recordEditFormLoader{
+    position: relative;
+    height: 100%;
+}
+.Filter_Text{
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #00396B;
+}
+.text_center{
+    text-align: center;
+   
+}
+.add_btn{
+    background: rgb(200, 255, 200);
+    border: 1px solid green;
+}
+.add_icon{
+    --sds-c-icon-color-foreground-default: green;
+}
+.delete_btn{
+    background: rgb(255, 161, 161);
+    border: 1px solid red;
+}
+.delete_icon{
+    --sds-c-icon-color-foreground-default: red;
+}
+.combobox{
+    text-align: left !important;
+}
+.selectBtn{
+    color: #00396B;
+    font-weight: 500;
+    border: 0.5px solid #00396B;
+}
+.selectBtn:hover{
+    background: #e4f3ff;
+    font-weight: 750;
+    border: 0.8px solid #00396B;
+}
+.slds-dueling-list__column_responsive .slds-dueling-list__options{
+    height: auto !important;
+    min-height: 5rem !important;
+}

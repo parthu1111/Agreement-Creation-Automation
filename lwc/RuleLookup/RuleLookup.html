@@ -1,0 +1,175 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="customHeading">rule Selection</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <hr />
+        <!-- <table class="slds-table lookupTable slds-table_cell-buffer slds-table_bordered">
+            <thead class="slds-assistive-text">
+                <tr class="slds-line-height_reset">
+                    <th class="table_col1" scope="col">
+                        <div class="slds-truncate" title="rule">rule</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="rule">Is Auto Included?</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Actions">Actions</div>
+                    </th>
+                </tr>
+            </thead> -->
+        <div class="slds-m-around_medium">
+            <table class="slds-table lookupTable slds-table_cell-buffer slds-table_bordered"
+                aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="table_col1 text_center" scope="col">
+                            <div class="slds-truncate" title="Sequence">rule</div>
+                        </th>
+                        <th class="table_col2 text_center" scope="col">
+                            <div class="slds-truncate" title="Sequence">Is Auto Included?</div>
+                        </th>
+                        <th class="text_center" scope="col">
+                            <div class="slds-truncate" title="Sequence">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <template for:each={rules} for:index="index" for:item="rule">
+                        <tr key={rule.id} class="slds-hint-parent">
+                            <td data-label="rule" class="lookupField text_center" scope="row">
+
+                                <div class="slds-form-element">
+                                    
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-combobox_container">
+                                            <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                                                aria-expanded="true" aria-haspopup="listbox" role="combobox">
+
+                                                <!-- if value is selected -->
+                                                <template if:true={rule.name}>
+                                                    <div data-key="pilldiv"
+                                                        class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right"
+                                                        role="none">
+                                                        <span
+                                                            class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon"
+                                                            title="object">
+                                                            <div class="slds-icon slds-icon_small" aria-hidden="true">
+                                                                <lightning-icon icon-name="standard:record"
+                                                                    size="small"></lightning-icon>
+                                                            </div>
+                                                            <span class="slds-assistive-text">Record</span>
+                                                        </span>
+                                                        <input type="text"
+                                                            class="slds-input slds-combobox__input slds-combobox__input-value"
+                                                            data-id={rule.id} aria-controls="listbox-id-5"
+                                                            role="textbox" placeholder="Select an Option" readonly
+                                                            value={rule.name} />
+                                                        <button
+                                                            class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                                            onclick={removeRecordOnLookup} data-id={rule.id}
+                                                            title="Remove selected option">
+                                                            <span class="slds-button__icon" aria-hidden="true">
+                                                                <lightning-icon icon-name="utility:close"
+                                                                    size="xx-Small"
+                                                                    class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                                                    aria-hidden="true"></lightning-icon>
+                                                            </span>
+                                                            <span class="slds-assistive-text">Remove selected
+                                                                record</span>
+                                                        </button>
+                                                    </div>
+                                                </template>
+
+                                                <!-- searching records -->
+                                                <template if:false={rule.name}>
+                                                    <div data-key={rule.id}
+                                                        class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                        role="none">
+                                                        <input type="text" onfocusout={onLeave} value={rule.searchkey}
+                                                            onkeyup={handleKeyChange} onchange={handleKeyChange}
+                                                            class="slds-input slds-combobox__input validation" data-id={rule.id}
+                                                            aria-autocomplete="list" aria-controls="listbox-id-2"
+                                                            role="textbox" placeholder="Search rule" required="" />
+                                                        <span
+                                                            class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                            <lightning-icon icon-name="utility:search" size="xx-Small"
+                                                                class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                                                aria-hidden="true"></lightning-icon>
+                                                        </span>
+                                                    </div>
+
+                                                    <template if:true={rule.recordsList}>
+                                                        <div id={rule.id} data-key="dropdownresult"
+                                                            class="slds-show slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                                            role="listbox">
+                                                            <ul class="slds-listbox slds-listbox_vertical"
+                                                                role="presentation">
+                                                                <template if:true={message}>
+                                                                    <span> {message}</span>
+                                                                </template>
+                                                                <template for:each={rule.recordsList}
+                                                                    for:item="record">
+                                                                    <li id={record.Id} key={record.Id}
+                                                                        onclick={onRecordSelection} role="presentation"
+                                                                        class="slds-listbox__item">
+                                                                        <div data-key={record.Id}
+                                                                            data-name={record.Name}
+                                                                            class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                            role="option">
+                                                                            <span
+                                                                                class="slds-media__figure slds-listbox__option-icon">
+                                                                                <span class="slds-icon_container">
+                                                                                    <lightning-icon
+                                                                                        icon-name="standard:record"
+                                                                                        size="small"></lightning-icon>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="slds-media__body">
+                                                                                <span data-id={rule.id}
+                                                                                    data-key={record.Id}
+                                                                                    data-name={record.Name}
+                                                                                    class="slds-listbox__option-text slds-listbox__option-text_entity">{record.Name}
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </li>
+                                                                </template>
+                                                            </ul>
+                                                        </div>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text_center">
+                                <lightning-input data-id={rule.id} name="isactive" type="checkbox"
+                                    checked={rule.isAutoIncluded} onchange={changeIsAutoIncluded}>
+                                </lightning-input>
+                            </td>
+                            <td class="text_center" data-label="Actions">
+                                <lightning-button-icon data-id={rule.id} icon-name="utility:add"
+                                    alternative-text="add" class="slds-m-left_xx-small" title="add"
+                                    onclick={addrule}></lightning-button-icon>
+                                <lightning-button-icon class={rule.displayDeleteAction} data-id={rule.id}
+                                    icon-name="action:delete" alternative-text="Delete" title="Delete"
+                                    onclick={deleterule}></lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+    </article>
+</template>

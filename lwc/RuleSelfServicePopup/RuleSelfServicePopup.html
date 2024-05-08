@@ -1,0 +1,72 @@
+<template>
+
+    <lightning-modal-header class="customLabel" label={label}></lightning-modal-header>
+    <lightning-modal-body>
+        <template if:false={loadingComponant}>
+            <template if:true={error}>
+                <div class="error_box">
+                    <p>{error}</p>
+                </div>
+            </template>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-combobox name="ruleSelection" class="inputStyle validation" label="rule" value={selectedrule}
+                        placeholder="Select rule" options={rules} onchange={handleSelectrule} required
+                        disabled={readOnly}></lightning-combobox>
+                    <!-- <template  if:true={selectedrule}>
+                            
+                        </template> -->
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+
+                    <lightning-record-edit-form id="form1" record-id={ruleId}
+                        object-api-name="Agreement_Self_Service_rule__c" onerror={handleError}>
+                        <lightning-messages></lightning-messages>
+                        <template if:true={selectedrule}>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <lightning-input-field class="inputStyle" onerror={handleError}
+                                        field-name="_Is_Excluded__c" name="_Is_Excluded__c"
+                                        onchange={handleInput} disabled={readOnly}></lightning-input-field>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={mergeFields}>
+                            <template for:each={mergeFields} for:item="fieldObj" for:index="index">
+                                <div key={fieldObj.id} class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <lightning-input-field id={fieldObj.field} class="inputStyle validation" onerror={handleError}
+                                            name={fieldObj.field} onchange={handleInput} field-name={fieldObj.field}
+                                            disabled={readOnly} readonly={readOnly} required></lightning-input-field>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <lightning-input-field class="inputStyle" if:true={selectedrule} onerror={handleError}
+                            field-name="Approval_Status__c" name="Approval_Status__c"
+                            disabled="true"></lightning-input-field>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </template>
+        <template if:true={loadingComponant}>
+            <div class="spinner"><lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner></div>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <template if:false={ruleId}>
+            <button class="mybtn slds-button slds-button_brand" disabled={loadingComponant} onclick={addOrUpdateHandler}>Add</button>
+        </template>
+        <template if:true={ruleId}>
+            <template if:false={readOnly}>
+                <button class="mybtn slds-button slds-button_brand" disabled={loadingComponant} onclick={addOrUpdateHandler}>Update</button>
+            </template>
+            <template if:true={readOnly}>
+                <button class="mybtn slds-button slds-button_brand" disabled={loadingComponant} onclick={enableEditHandler}>Edit</button>
+            </template>
+        </template>
+        <button class="mybtn slds-button slds-button_brand" disabled={loadingComponant} onclick={cancelHandler}>Cancel</button>
+    </lightning-modal-footer>
+
+
+</template>
